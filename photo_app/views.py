@@ -69,7 +69,6 @@ def deletePhoto(request, gallery_id, photo_id):
 
 def editPhoto(request, gallery_id, photo_id):
     photo = Photo.objects.get(pk=photo_id)
-#    form = PhotoForm(request.POST or None, instance=photo)
     form = PhotoForm(instance=photo)
 
     if request.method == 'POST':

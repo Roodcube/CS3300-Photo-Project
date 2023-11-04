@@ -37,7 +37,7 @@ class Photo(models.Model):
     title = models.CharField(max_length=200)
     picture = models.ImageField(null=True)
     about = models.TextField((""), blank=True)
-    altText = models.CharField(max_length=200)
+    altText = models.CharField(max_length=200, default="User Submitted Photo")
     gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE, default = None)
 
 

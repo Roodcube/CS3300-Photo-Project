@@ -4,8 +4,7 @@
 {% block content %}
 <h1>Gallery Title: {{ gallery.title }}</h1>
 
-<p><strong>Gallery Active:</strong> {{ gallery.isActive }}</p>
-<p><strong>About:</strong> {{ gallery.about }}</p>
+<h4><strong>About:</strong> {{ gallery.about }}</h2>
 <h2>Photos:</h2>
 <a class="btn btn-primary" href="{% url 'create_photo' gallery.id %}" role="button">New</a>
 {% if photo_list %}

@@ -10,10 +10,10 @@
 <h2>List of Photographers with Active Galleries</h2>
 <ul class="list-group">
 {% for i in photographer_active_galleries %}
-<li class="list-group-item">Name: {{i.name}}
-<p><strong>Gallery: {{ i.gallery.title }}</strong>
+<li class="list-group-item"><h4>Name: {{i.name}}</h4>
+<h4><strong>Gallery: {{ i.gallery.title }}</strong>
 <a class="btn btn-primary" href="{{ i.gallery.get_absolute_url }}" role="button">View</a>
-</p>
+</h4>
 </li>
 {% endfor %}
 </ul>
