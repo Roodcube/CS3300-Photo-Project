@@ -1,0 +1,17 @@
+{% extends 'photo_app/base_template.html' %}
+
+
+{% block content %}
+<h1>Photographer List</h1>
+{% if photographer_list %}
+<ul>
+{% for photographer in photographer_list %}
+<li>
+<a href="{{ photographer.get_absolute_url }}">{{ photographer.name }}</a>
+</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>There are no photographers registered.</p>
+{% endif %}
+{% endblock %}

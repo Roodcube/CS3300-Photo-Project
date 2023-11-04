@@ -1,0 +1,19 @@
+<!-- inherit from base.html -->
+{% extends 'photo_app/base_template.html' %}
+
+
+<!-- Replace block content in base_template.html -->
+{% block content %}
+
+<p>Are you sure you want to delete "{{ITEM}}"?</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <a class="btn btn-primary" href="{% url 'gallery-detail' ITEM.gallery_id %}" role="button">Cancel</a>
+
+    <button class="btn btn-danger" type="submit">Delete</button>
+</form>
+
+
+{% endblock %}

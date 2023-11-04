@@ -1,0 +1,23 @@
+{% extends 'photo_app/base_template.html' %}
+
+
+{% block content %}
+
+<style>
+    .my-picture{
+        max-width: 200px;
+        max-height: 200px:
+        margin: 0 auto;
+    }
+</style>
+
+<h1>Photo Title: {{ photo.title }}</h1>
+
+<img class="my-picture" src="{{photo.picture.url}}" alt="{{photo.altText}}">
+<p><strong>Gallery: </strong><a href="{{ photo.gallery.get_absolute_url }}">{{ photo.gallery.title }} </a>
+<p><strong>About: </strong> {{ photo.about }}</p>
+<a class="btn btn-primary" href="{% url 'gallery-detail' photo.gallery_id %}" role="button">Back</a>
+
+
+
+{% endblock %}

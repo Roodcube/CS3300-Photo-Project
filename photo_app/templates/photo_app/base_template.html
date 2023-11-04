@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>User Photographers</title>
+<meta charset="utf-8" />
+<style>
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+.card{
+    text-white bg-dark mb-3
+    }
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+</head>
+
+
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<div class="container-fluid">
+<img src="{% static 'images/uccs_logo.gif' %}">
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav">
+<li class="nav-item">
+<a class="nav-link" href="{% url 'index' %}">Home</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="{% url 'photographers' %}">Photographers</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">Menu 2</a>
+</li>
+</ul>
+</div>
+<button onclick="myFunction()" type="button" class="btn btn-primary position-relative">
+    Toggle Dark Mode <span class="position-absolute top-0 start-100 translate-middle badge"></span>
+</button>
+</div>
+</nav>
+
+<script>
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+   element.classList.toggle(".card");
+}
+</script>
+<!-- add block content from html template -->
+{% block content %}
+
+
+{% endblock %}
+</body>
+</html>

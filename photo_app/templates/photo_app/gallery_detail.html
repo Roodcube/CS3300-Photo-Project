@@ -1,0 +1,32 @@
+{% extends 'photo_app/base_template.html' %}
+
+
+{% block content %}
+<h1>Gallery Title: {{ gallery.title }}</h1>
+
+<p><strong>Gallery Active:</strong> {{ gallery.isActive }}</p>
+<p><strong>About:</strong> {{ gallery.about }}</p>
+<h2>Photos:</h2>
+<a class="btn btn-primary" href="{% url 'create_photo' gallery.id %}" role="button">New</a>
+{% if photo_list %}
+<div class="row">
+{% for photo in photo_list %}
+<div class="col-auto">
+<div class=".card" style="width: 15rem;">
+<div class="card-body">
+    <h5 class="card-title">{{ photo.title }}</h5>
+    <img class="card-img-top" src="{{photo.picture.url}}" alt="{{photo.altText}}">
+    <p class="card-text">{{photo.about}}</p>
+    <a class="btn btn-primary" href="{{ photo.get_absolute_url }}" role="button">View</a>
+    <a class="btn btn-primary" href="{% url 'edit_photo' gallery.id photo.id %}" role="button">Edit</a>
+    <a class="btn btn-danger" href="{% url 'delete_photo' gallery.id photo.id %}" role="button">Delete</a>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+{% else %}
+<p>There are no photos registered.</p>
+{% endif %}
+
+{% endblock %}
