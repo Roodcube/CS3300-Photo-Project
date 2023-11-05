@@ -5,8 +5,9 @@
 <h1>Gallery Title: {{ gallery.title }}</h1>
 
 <h4><strong>About:</strong> {{ gallery.about }}</h2>
-<h2>Photos:</h2>
-<a class="btn btn-primary" href="{% url 'create_photo' gallery.id %}" role="button">New</a>
+<h2>Photos:
+    <a class="btn btn-primary" href="{% url 'create_photo' gallery.id %}" role="button">Add New Photo</a>
+</h2>
 {% if photo_list %}
 <div class="row">
 {% for photo in photo_list %}
