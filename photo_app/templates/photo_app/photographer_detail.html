@@ -5,8 +5,8 @@
 <h1>Photographer Name: {{ photographer.name }}</h1>
 
 
-<p><strong>Email: </strong> {{ photographer.email }}</p>
-<p><strong>Gallery: </strong><a href="{{ photographer.gallery.get_absolute_url }}">{{ photographer.gallery.title }} </a>
+<h4><strong>Email: </strong> {{ photographer.email }}</h4>
+<h4><strong>Gallery: </strong><a href="{{ photographer.gallery.get_absolute_url }}">{{ photographer.gallery.title }} </a>
     <a class="btn btn-primary" href="{% url 'edit_gallery' photographer.gallery.id %}" role="button">Edit</a>
 
 {% endblock %}
