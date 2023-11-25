@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'bootstrap5',
 ]
 
+#SESSION_ENGINE = [
+#    'django.contrib.sessions.backends.signed_cookies',
+#]
+
 AUTHENTICATION_BACKENDS = [
 'django.contrib.auth.backends.ModelBackend',
 ]
@@ -62,7 +66,7 @@ ROOT_URLCONF = 'django_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'photo_app/templates/photo_app')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,3 +142,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'Static/userPhotos')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/'
