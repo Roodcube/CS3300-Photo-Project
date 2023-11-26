@@ -20,8 +20,10 @@
 {% for photo in photo_list %}
 <div class="col-auto">
 <div class="card text-white bg-secondary border-4 border-light mb-5" style="max-width: 18rem;">
-<div class="card-body">
+    <div class="card-header bg-dark">
     <h5 class="card-title">{{ photo.title }}</h5>
+    </div>
+<div class="card-body">
     <img class="card-img-top rounded-circle" src="{{photo.picture.url}}" alt="{{photo.altText}}">
     <p class="card-text">{{photo.about}}</p>
     <div class="text-center">
@@ -30,7 +32,10 @@
     <a class="btn btn-primary btn-lg" href="{% url 'edit_photo' gallery.id photo.id %}" role="button">Edit</a>
     <a class="btn btn-danger btn-lg" href="{% url 'delete_photo' gallery.id photo.id %}" role="button">Delete</a>
     {% endif %}
+</div>
     </div>
+    <div class="card-footer bg-dark">
+        <div class="card-text">{{ photo.number_of_likes }} Like{{ photo.number_of_likes|pluralize }}</div>
 </div>
 </div>
 </div>

@@ -15,6 +15,7 @@ path('photographer/<int:pk>', views.PhotographerDetailView.as_view(), name='phot
 path('gallery/<int:pk>', views.GalleryDetailView.as_view(), name='gallery-detail'),
 path('photos/', views.PhotoListView.as_view(), name='photos'),
 path('photo/<int:pk>', views.PhotoDetailView.as_view(), name='photo-detail'),
+path('photo-like/<int:pk>', views.photoLike, name="photo_like"),
 
 path('gallery/<int:gallery_id>/create_photo/', views.createPhoto, name='create_photo'),
 path('gallery/<int:gallery_id>/delete_photo/<int:photo_id>', views.deletePhoto, name='delete_photo'),

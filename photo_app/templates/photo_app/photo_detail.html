@@ -3,13 +3,42 @@
 
 {% block content %}
 
-<h1>Photo Title: {{ photo.title }}</h1>
-
+<div class = "card mb-3">
+    <div class="row g-0">
+        <div class="col-md-6">
 <img class="img-fluid" src="{{photo.picture.url}}" alt="{{photo.altText}}">
+        </div>
+        <div class="col-md-6">
+            <div class="card-body>">
+                <div class="text-center">
+                    <div class="mt-4">
+<h1>Photo Title: {{ photo.title }}</h1>
 <h4><strong>Gallery: </strong><a href="{{ photo.gallery.get_absolute_url }}">{{ photo.gallery.title }} </a>
 <h4><strong>About: </strong> {{ photo.about }}</h4>
-<a class="btn btn-primary btn-lg" href="{% url 'gallery-detail' photo.gallery_id %}" role="button">Back</a>
-
-
+<!-- LIKES -->
+{% if user.is_authenticated %}
+<form action="{% url 'photo_like' photo.id %}" method="POST">
+  {% csrf_token %}
+  <a>
+  {% if post_is_liked %}
+  <button type="submit" name="photo_id" value="{{photo.id}}" class="btn btn-primary">Unlike</button>
+  {% else %}
+  <button type="submit" name="photo_id" value="{{photo.id}}" class="btn btn-primary">Like</button>
+  {% endif %}
+</form>
+{% else %}
+<a class="btn btn-outline-success" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
+{% endif %}
+<strong class="text-secondary">{{ number_of_likes }} Like{{ number_of_likes|pluralize }}</strong>
+</a>
+</div>
+</div>
+            </div>
+        </div>
+    </div>
+    <div class="position-absolute bottom-0 end-0">
+    <a class="btn btn-primary btn-lg" href="{% url 'gallery-detail' photo.gallery_id %}" role="button">Back to Gallery</a>
+    </div>
+</div>
 
 {% endblock %}
