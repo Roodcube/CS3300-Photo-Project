@@ -21,6 +21,7 @@ path('gallery/<int:gallery_id>/delete_photo/<int:photo_id>', views.deletePhoto, 
 path('gallery/<int:gallery_id>/edit_photo/<int:photo_id>', views.editPhoto, name='edit_photo'),
 path('gallery/edit_gallery/<int:gallery_id>', views.editGallery, name='edit_gallery'),
 
+path('accounts/register/', views.registerPage, name = 'register_page',)
 ]
 
 urlpatterns += [

@@ -12,7 +12,7 @@
 {% for i in photographer_active_galleries %}
 <li class="list-group-item"><h4>Name: {{i.name}}</h4>
 <h4><strong>Gallery: {{ i.gallery.title }}</strong>
-<a class="btn btn-primary" href="{{ i.gallery.get_absolute_url }}" role="button">View</a>
+<a class="btn btn-primary btn-lg" href="{{ i.gallery.get_absolute_url }}" role="button">View</a>
 </h4>
 </li>
 {% endfor %}

@@ -3,20 +3,12 @@
 
 {% block content %}
 
-<style>
-    .my-picture{
-        max-width: 1000px;
-        max-height: 1000px:
-        margin: 0 auto;
-    }
-</style>
-
 <h1>Photo Title: {{ photo.title }}</h1>
 
-<img class="my-picture" src="{{photo.picture.url}}" alt="{{photo.altText}}">
+<img class="img-fluid" src="{{photo.picture.url}}" alt="{{photo.altText}}">
 <h4><strong>Gallery: </strong><a href="{{ photo.gallery.get_absolute_url }}">{{ photo.gallery.title }} </a>
 <h4><strong>About: </strong> {{ photo.about }}</h4>
-<a class="btn btn-primary" href="{% url 'gallery-detail' photo.gallery_id %}" role="button">Back</a>
+<a class="btn btn-primary btn-lg" href="{% url 'gallery-detail' photo.gallery_id %}" role="button">Back</a>
 
 
 

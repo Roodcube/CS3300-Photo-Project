@@ -9,7 +9,7 @@
     background-color: black;
     color: white;
 }
-.card{
+.dark-card{
     text-white bg-dark mb-3
     }
 </style>
@@ -34,6 +34,12 @@
 <li class="nav-item">
 <a class="nav-link" href="{% url 'photographers' %}"><h4>Photographers</h4></a>
 </li>
+{% if user.is_authenticated %}
+<li class="nav-item"><a class="nav-link" href="{% url 'logout' %}?next={{ request.path }}"><h4>Logout</h4></a></li>
+<li class="nav-item"><h4>Welcome {{ user.get_username }}</h4></li>
+{% else %}
+<li class="nav-item"><a class="nav-link" href="{% url 'login' %}?next={{ request.path }}"><h4>Login</h4></a></li>
+{% endif %}
 </ul>
 </div>
 <button onclick="myFunction()" type="button" class="btn btn-primary position-relative">
@@ -41,18 +47,19 @@
 </button>
 </div>
 </nav>
-
 <script>
 function myFunction() {
    var element = document.body;
    element.classList.toggle("dark-mode");
-   element.classList.toggle(".card");
 }
 </script>
+
+<div class="mx-5">
 <!-- add block content from html template -->
 {% block content %}
 
 
 {% endblock %}
+</div>
 </body>
 </html>

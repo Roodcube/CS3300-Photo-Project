@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views import generic
 from .models import *
 from .forms import *
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -92,3 +93,23 @@ def editGallery(request, gallery_id):
     
     context = {'form': form}
     return render(request, 'photo_app/edit_gallery.html', context)
+
+def registerPage(request):
+
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            photographer = Photographer.objects.create(user=user,)
+            gallery = Gallery.objects.create()
+            photographer.gallery = gallery
+            photographer.save()
+
+            messages.success(request, 'Account was created for ' + username)
+            return redirect('login')
+    
+    context ={'form':form}
+    return render(request, 'registration/register.html', context)
