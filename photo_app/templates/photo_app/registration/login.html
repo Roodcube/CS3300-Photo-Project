@@ -17,23 +17,24 @@
       <p>Your account doesn't have access to this page. To proceed,
       please login with an account that has access.</p>
     {% else %}
-      <p>Please login to see this page.</p>
+      <h2>Please login to see this page.</h2>
     {% endif %}
   {% endif %}
-
+<br/>
   <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
-    <table>
-      <tr>
-        <td>{{ form.username.label_tag }}</td>
-        <td>{{ form.username }}</td>
-      </tr>
-      <tr>
-        <td>{{ form.password.label_tag }}</td>
-        <td>{{ form.password }}</td>
-      </tr>
-    </table>
-    <input type="submit" value="login">
+          <div class="form-group">
+            <h4>Username:</h4>
+
+          <input class="form-control-lg" value="" placeholder="Enter your name" type=""{{ form.username }}>
+
+            <h4>Password:</h4>
+
+          <input class="form-control-lg" value="" placeholder="Enter your password" type="password"{{ form.password }}>
+          </div>
+
+          <br/>
+    <button class="btn btn-primary" type="submit">Submit</button>
     <input type="hidden" name="next" value="{{ next }}">
   </form>
 
