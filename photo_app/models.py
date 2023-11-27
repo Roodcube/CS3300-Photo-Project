@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -19,8 +20,8 @@ class Photographer(models.Model):
 
     name = models.CharField(max_length=200)
     email = models.CharField("UCCS Email", max_length=200)
-    #major = models.CharField(max_length=200)
-    gallery = models.OneToOneField(Gallery, on_delete=models.CASCADE, unique=True, default=None)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    gallery = models.OneToOneField(Gallery, null=True, on_delete=models.CASCADE, unique=True, default=None)
 
     #Define default String to return the name for representing the Model object."
     def __str__(self):
@@ -39,12 +40,15 @@ class Photo(models.Model):
     about = models.TextField((""), blank=True)
     altText = models.CharField(max_length=200, default="User Submitted Photo")
     gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE, default = None)
+    likes = models.ManyToManyField(User, related_name='photo_like')
 
 
     def __str__(self):
         return self.title
     def get_absolute_url(self):
         return reverse('photo-detail', args=[str(self.id)])
+    def number_of_likes(self):
+        return self.likes.count()
     
 """
 # Model to represent the relationship between photos and Gallerys.

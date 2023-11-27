@@ -2,24 +2,41 @@
 
 
 {% block content %}
-<h1>Gallery Title: {{ gallery.title }}</h1>
+<div class="jumbotron">
+<div class="container">
+<h1 class="display-4">{{ gallery.title }}</h1>
 
-<h4><strong>About:</strong> {{ gallery.about }}</h2>
-<h2>Photos:
-    <a class="btn btn-primary" href="{% url 'create_photo' gallery.id %}" role="button">Add New Photo</a>
+<h4 class="lead">{{ gallery.about }}</h2>
+    <hr class="my-4">
+</div>
+</div>
+<h2>
+    {% if user.is_authenticated %}
+    <a class="btn btn-primary btn-lg" href="{% url 'create_photo' gallery.id %}" role="button">Add New Photo</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'edit_gallery' gallery.id %}" role="button">Edit Gallery</a>
+        {% endif %}
 </h2>
 {% if photo_list %}
 <div class="row">
 {% for photo in photo_list %}
 <div class="col-auto">
-<div class=".card" style="width: 15rem;">
-<div class="card-body">
+<div class="card text-white bg-secondary border-4 border-dark mb-5" style="max-width: 18rem;">
+    <div class="card-header bg-dark">
     <h5 class="card-title">{{ photo.title }}</h5>
-    <img class="card-img-top" src="{{photo.picture.url}}" alt="{{photo.altText}}">
+    </div>
+<div class="card-body">
+    <img class="card-img-top rounded-circle" src="{{photo.picture.url}}" alt="{{photo.altText}}">
     <p class="card-text">{{photo.about}}</p>
-    <a class="btn btn-primary" href="{{ photo.get_absolute_url }}" role="button">View</a>
-    <a class="btn btn-primary" href="{% url 'edit_photo' gallery.id photo.id %}" role="button">Edit</a>
-    <a class="btn btn-danger" href="{% url 'delete_photo' gallery.id photo.id %}" role="button">Delete</a>
+    <div class="text-center">
+    <a class="btn btn-primary btn-lg" href="{{ photo.get_absolute_url }}" role="button">View</a>
+    {% if user.is_authenticated %}
+    <a class="btn btn-primary btn-lg" href="{% url 'edit_photo' gallery.id photo.id %}" role="button">Edit</a>
+    <a class="btn btn-danger btn-lg" href="{% url 'delete_photo' gallery.id photo.id %}" role="button">Delete</a>
+    {% endif %}
+</div>
+    </div>
+    <div class="card-footer bg-dark">
+        <div class="card-text">{{ photo.number_of_likes }} Like{{ photo.number_of_likes|pluralize }}</div>
 </div>
 </div>
 </div>

@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect
 from django.views import generic
 from .models import *
 from .forms import *
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -30,6 +31,28 @@ class PhotoListView(generic.ListView):
     model = Photo
 class PhotoDetailView(generic.DetailView):
     model = Photo
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        likes_connected = get_object_or_404(Photo, id=self.kwargs['pk'])
+        liked = False
+        if likes_connected.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        context['number_of_likes'] = likes_connected.number_of_likes()
+        context['post_is_liked'] = liked
+        return context
+
+def photoLike(request, pk):
+    photo = get_object_or_404(Photo, id=request.POST.get('photo_id'))
+
+    if photo.likes.filter(id=request.user.id).exists():
+        photo.likes.remove(request.user)
+    else:
+        photo.likes.add(request.user)
+
+    return HttpResponseRedirect(reverse('photo-detail', args=[str(pk)]))
+
 
 def createPhoto(request, gallery_id):
     form = PhotoForm()
@@ -92,3 +115,26 @@ def editGallery(request, gallery_id):
     
     context = {'form': form}
     return render(request, 'photo_app/edit_gallery.html', context)
+
+def registerPage(request):
+
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            photographer = Photographer.objects.create(user=user,)
+            gallery = Gallery.objects.create()
+            photographer.gallery = gallery
+            photographer.gallery.title = username
+            photographer.name = username
+            photographer.user = user
+            photographer.save()
+
+            messages.success(request, 'Account was created for ' + username)
+            return redirect('login')
+    
+    context ={'form':form}
+    return render(request, 'registration/register.html', context)

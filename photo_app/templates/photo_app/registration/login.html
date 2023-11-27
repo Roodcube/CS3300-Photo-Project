@@ -1,0 +1,45 @@
+<!-- inherit from base.html -->
+{% extends 'photo_app/base_template.html' %}
+
+{% block content %}
+
+  <!-- doesn't work correctly - do not want to do all messages-->
+  {% for message in messages %}
+    <p>{{message}}</p>
+  {% endfor %}
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <h2>Please login to see this page.</h2>
+    {% endif %}
+  {% endif %}
+<br/>
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+          <div class="form-group">
+            <h4>Username:</h4>
+
+          <input class="form-control-lg" value="" placeholder="Enter your name" type=""{{ form.username }}>
+
+            <h4>Password:</h4>
+
+          <input class="form-control-lg" value="" placeholder="Enter your password" type="password"{{ form.password }}>
+          </div>
+
+          <br/>
+    <button class="btn btn-primary" type="submit">Submit</button>
+    <input type="hidden" name="next" value="{{ next }}">
+  </form>
+
+  {# Assumes you setup the password_reset view in your URLconf #}
+  <!--<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+  <p><a href="{% url 'register_page' %}">Register</a></p>-->
+
+{% endblock %}
