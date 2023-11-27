@@ -128,6 +128,9 @@ def registerPage(request):
             photographer = Photographer.objects.create(user=user,)
             gallery = Gallery.objects.create()
             photographer.gallery = gallery
+            photographer.gallery.title = username
+            photographer.name = username
+            photographer.user = user
             photographer.save()
 
             messages.success(request, 'Account was created for ' + username)

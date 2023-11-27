@@ -13,13 +13,14 @@
 <h2>
     {% if user.is_authenticated %}
     <a class="btn btn-primary btn-lg" href="{% url 'create_photo' gallery.id %}" role="button">Add New Photo</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'edit_gallery' gallery.id %}" role="button">Edit Gallery</a>
         {% endif %}
 </h2>
 {% if photo_list %}
 <div class="row">
 {% for photo in photo_list %}
 <div class="col-auto">
-<div class="card text-white bg-secondary border-4 border-light mb-5" style="max-width: 18rem;">
+<div class="card text-white bg-secondary border-4 border-dark mb-5" style="max-width: 18rem;">
     <div class="card-header bg-dark">
     <h5 class="card-title">{{ photo.title }}</h5>
     </div>
